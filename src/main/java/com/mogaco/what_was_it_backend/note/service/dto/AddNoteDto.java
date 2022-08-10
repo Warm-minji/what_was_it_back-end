@@ -1,4 +1,4 @@
-package com.mogaco.what_was_it_backend.member.service.dto;
+package com.mogaco.what_was_it_backend.note.service.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,10 +1,10 @@
-package com.mogaco.what_was_it_backend.member.service;
+package com.mogaco.what_was_it_backend.note.service;
 
 import com.mogaco.what_was_it_backend.member.domain.Member;
-import com.mogaco.what_was_it_backend.member.domain.Note;
-import com.mogaco.what_was_it_backend.member.repository.MemberRepository;
+import com.mogaco.what_was_it_backend.note.domain.Note;
+import com.mogaco.what_was_it_backend.note.repository.MemberRepository;
 import com.mogaco.what_was_it_backend.member.repository.NoteRepository;
-import com.mogaco.what_was_it_backend.member.service.dto.AddNoteDto;
+import com.mogaco.what_was_it_backend.note.service.dto.AddNoteDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,11 +29,9 @@ public class NoteService {
         for (AddNoteDto noteDto : addNoteDto) {
             //멤버 조회
             Member member = memberRepository.findById(noteDto.getMemberId()).orElseThrow(NoSuchElementException::new);
-            //노트의 동일한 제목이 있는지 확인
             Note titleNote = noteRepository.findByTitle(noteDto.getTitle());
-
             //멤버에 동일한 제목을 가진 노트가 있다면 update해주고, 아니면 새로 노트를 생성
-            if ((noteDto.getTitle()).equals(titleNote.getTitle())) {
+            if (titleNote != null) {
                 titleNote.updateNote(noteDto);
             } else {
                 Note note = Note.createNote(member, noteDto);

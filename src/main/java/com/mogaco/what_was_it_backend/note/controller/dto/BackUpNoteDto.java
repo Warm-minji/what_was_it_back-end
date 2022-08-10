@@ -1,6 +1,6 @@
-package com.mogaco.what_was_it_backend.member.controller.dto;
+package com.mogaco.what_was_it_backend.note.controller.dto;
 
-import com.mogaco.what_was_it_backend.member.service.dto.AddNoteDto;
+import com.mogaco.what_was_it_backend.note.service.dto.AddNoteDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

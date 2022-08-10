@@ -1,13 +1,13 @@
-package com.mogaco.what_was_it_backend.member.domain;
+package com.mogaco.what_was_it_backend.note.domain;
 
-import com.mogaco.what_was_it_backend.member.service.dto.AddNoteDto;
+import com.mogaco.what_was_it_backend.member.domain.Member;
+import com.mogaco.what_was_it_backend.note.service.dto.AddNoteDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
