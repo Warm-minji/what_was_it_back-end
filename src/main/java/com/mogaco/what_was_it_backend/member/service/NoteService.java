@@ -24,18 +24,27 @@ public class NoteService {
      * 백업하기
      */
     @Transactional
-    public void addNotes(String memberId, List<Note> notes, AddNoteDto addNoteDto) {
-        //멤버 조회
-        Member member = memberRepository.findById(memberId).orElseThrow(NoSuchElementException::new);
-        //노트 생성
-        for (Note note : notes) {
-            Note createdNote = Note.createNote(member, addNoteDto);
-            noteRepository.save(createdNote);
+    public void addAllNotes(List<AddNoteDto> addNoteDto) {
+        //노트 추가
+        for (AddNoteDto noteDto : addNoteDto) {
+            //멤버 조회
+            Member member = memberRepository.findById(noteDto.getMemberId()).orElseThrow(NoSuchElementException::new);
+            //노트의 동일한 제목이 있는지 확인
+            Note titleNote = noteRepository.findByTitle(noteDto.getTitle());
+
+            //멤버에 동일한 제목을 가진 노트가 있다면 update해주고, 아니면 새로 노트를 생성
+            if ((noteDto.getTitle()).equals(titleNote.getTitle())) {
+                titleNote.updateNote(noteDto);
+            } else {
+                Note note = Note.createNote(member, noteDto);
+                noteRepository.save(note);
+            }
         }
     }
 
     /**
      * 복원하기
      */
+
 
 }

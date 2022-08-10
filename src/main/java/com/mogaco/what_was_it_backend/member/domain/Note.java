@@ -48,11 +48,7 @@ public class Note {
         this.isRepeatable = isRepeatable;
     }
 
-    public void setMember(Member member) {
-        this.member = member;
-    }
-
-    //===멤버 설정 메서드===//
+    //===생성 메서드===//
     public static Note createNote(Member member, AddNoteDto addNoteDto) {
         return new Note(member,
                 addNoteDto.getTitle(),
@@ -61,5 +57,15 @@ public class Note {
                 addNoteDto.getAlarmPeriod(),
                 addNoteDto.getPublishedDate(),
                 addNoteDto.isRepeatable());
+    }
+
+    //===업데이트 로직===//
+    public void updateNote(AddNoteDto note) {
+        this.title = note.getTitle();
+        this.category = note.getCategory();
+        this.keyword = note.getKeyword();
+        this.alarmPeriod = note.getAlarmPeriod();
+        this.publishedDate = note.getPublishedDate();
+        this.isRepeatable = note.isRepeatable();
     }
 }
