@@ -1,19 +1,14 @@
-package com.mogaco.what_was_it_backend.note.controller.dto;
+package com.mogaco.what_was_it_backend.note.service.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class BackUpNoteRequest {
+public class FindNoteDto {
 
     private String memberId;
     private String password;
-    private List<BackUpNoteDto> notes;
-
-
 }

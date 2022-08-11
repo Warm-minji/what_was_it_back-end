@@ -5,12 +5,15 @@ import com.mogaco.what_was_it_backend.note.domain.Note;
 import com.mogaco.what_was_it_backend.member.repository.MemberRepository;
 import com.mogaco.what_was_it_backend.note.repository.NoteRepository;
 import com.mogaco.what_was_it_backend.note.service.dto.AddNoteDto;
+import com.mogaco.what_was_it_backend.note.service.dto.FindNoteDto;
+import com.mogaco.what_was_it_backend.note.service.dto.RestoreNoteDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +25,7 @@ public class NoteService {
 
     /**
      * 백업하기
+     * TODO : 비밀번호 틀리면 접근 못하게 케이스 추가
      */
     @Transactional
     public void addAllNotes(List<AddNoteDto> addNoteDto) {
@@ -44,6 +48,22 @@ public class NoteService {
     /**
      * 복원하기
      */
+    public List<RestoreNoteDto> findAllNotes(FindNoteDto findNoteDto) {
+        
+        Member member = memberRepository
+                .findById(findNoteDto.getMemberId())
+                .orElseThrow(NoSuchElementException::new);
+
+        return noteRepository.findAllByMember(member)
+                .stream().map(note -> new RestoreNoteDto(note.getMember().getId(),
+                        note.getTitle(),
+                        note.getCategory(),
+                        note.getKeyword(),
+                        note.getAlarmPeriod(),
+                        note.getPublishedDate(),
+                        note.isRepeatable()))
+                .collect(Collectors.toList());
+    }
 
 
 }
