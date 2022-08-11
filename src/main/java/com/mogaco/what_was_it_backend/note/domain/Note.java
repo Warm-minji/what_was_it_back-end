@@ -27,25 +27,27 @@ public class Note {
 
     private String title;
     private String category;
-    private String keyword;
 
     @ElementCollection
-    @CollectionTable(name = "alarm_period", joinColumns = @JoinColumn(name = "note_id"))
-    private List<Integer> alarmPeriod;
+    @CollectionTable(name = "keywords", joinColumns = @JoinColumn(name = "note_id"))
+    private List<String> keywords;
+
+    @ElementCollection
+    @CollectionTable(name = "scheduled_dates", joinColumns = @JoinColumn(name = "note_id"))
+    private List<LocalDateTime> scheduledDates;
+
+    private RepeatType repeatType;
 
     private LocalDateTime publishedDate;
 
-    @Column(nullable = false, columnDefinition = "TINYINT(1)")
-    private boolean isRepeatable;
-
-    public Note(Member member, String title, String category, String keyword, List<Integer> alarmPeriod, LocalDateTime publishedDate, boolean isRepeatable) {
+    public Note(Member member, String title, String category, List<String> keywords, List<LocalDateTime> scheduledDates, RepeatType repeatType, LocalDateTime publishedDate) {
         this.member = member;
         this.title = title;
         this.category = category;
-        this.keyword = keyword;
-        this.alarmPeriod = alarmPeriod;
+        this.keywords = keywords;
+        this.scheduledDates = scheduledDates;
+        this.repeatType = repeatType;
         this.publishedDate = publishedDate;
-        this.isRepeatable = isRepeatable;
     }
 
     //===생성 메서드===//
@@ -53,19 +55,19 @@ public class Note {
         return new Note(member,
                 addNoteDto.getTitle(),
                 addNoteDto.getCategory(),
-                addNoteDto.getKeyword(),
-                addNoteDto.getAlarmPeriod(),
-                addNoteDto.getPublishedDate(),
-                addNoteDto.isRepeatable());
+                addNoteDto.getKeywords(),
+                addNoteDto.getScheduledDates(),
+                addNoteDto.getRepeatType(),
+                addNoteDto.getPublishedDate());
     }
 
     //===업데이트 로직===//
     public void updateNote(AddNoteDto note) {
         this.title = note.getTitle();
         this.category = note.getCategory();
-        this.keyword = note.getKeyword();
-        this.alarmPeriod = note.getAlarmPeriod();
+        this.keywords = note.getKeywords();
+        this.scheduledDates = note.getScheduledDates();
+        this.repeatType = note.getRepeatType();
         this.publishedDate = note.getPublishedDate();
-        this.isRepeatable = note.isRepeatable();
     }
 }

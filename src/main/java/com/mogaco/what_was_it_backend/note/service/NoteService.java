@@ -60,10 +60,10 @@ public class NoteService {
                 .stream().map(note -> new RestoreNoteDto(note.getMember().getId(),
                         note.getTitle(),
                         note.getCategory(),
-                        note.getKeyword(),
-                        note.getAlarmPeriod(),
-                        note.getPublishedDate(),
-                        note.isRepeatable()))
+                        note.getKeywords(),
+                        note.getScheduledDates(),
+                        note.getRepeatType(),
+                        note.getPublishedDate()))
                 .collect(Collectors.toList());
     }
 

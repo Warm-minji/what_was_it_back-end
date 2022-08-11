@@ -34,7 +34,7 @@ public class NoteController {
     }
 
     @GetMapping("/restore")
-    public ResponseEntity<List<RestoreNoteDto>> restoreNotes(@RequestBody RestoreNotesRequest restoreNotesRequest) {
+    public ResponseEntity<List<RestoreNoteDto>> restoreNotes(@ModelAttribute RestoreNotesRequest restoreNotesRequest) {
 
         List<RestoreNoteDto> allNotes = noteService.findAllNotes(restoreNotesRequest.toServiceDto());
 

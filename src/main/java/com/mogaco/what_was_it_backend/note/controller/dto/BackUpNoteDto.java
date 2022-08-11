@@ -1,5 +1,6 @@
 package com.mogaco.what_was_it_backend.note.controller.dto;
 
+import com.mogaco.what_was_it_backend.note.domain.RepeatType;
 import com.mogaco.what_was_it_backend.note.service.dto.AddNoteDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,12 +17,12 @@ public class BackUpNoteDto {
     private String memberId;
     private String title;
     private String category;
-    private String keyword;
-    private List<Integer> alarmPeriod;
+    private List<String> keywords;
+    private List<LocalDateTime> scheduledDates;
+    private RepeatType repeatType;
     private LocalDateTime publishedDate;
-    private boolean isRepeatable;
 
     public AddNoteDto toServiceDto() {
-        return new AddNoteDto(memberId, title, category, keyword, alarmPeriod, publishedDate, isRepeatable);
+        return new AddNoteDto(memberId, title, category, keywords, scheduledDates, repeatType, publishedDate);
     }
 }

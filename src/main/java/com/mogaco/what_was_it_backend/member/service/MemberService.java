@@ -15,6 +15,11 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
+    /**
+     * TODO : 아이디 비밀번호 관련 로직 추가 (자리 수, 비밀번호 제약 등)
+     * @param memberId
+     * @param password
+     */
     @Transactional
     public void createMember(String memberId, String password) {
 

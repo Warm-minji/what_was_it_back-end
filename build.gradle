@@ -30,3 +30,8 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+bootJar {
+	archivesBaseName='what_was_it'
+	archiveFileName='what_was_it.jar'
+}
