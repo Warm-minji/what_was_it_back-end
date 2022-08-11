@@ -26,4 +26,9 @@ public class MemberService {
         Member member = Member.createMember(memberId, password);
         memberRepository.save(member);
     }
+
+    @Transactional
+    public void deleteMember(String memberId) {
+        memberRepository.removeById(memberId);
+    }
 }

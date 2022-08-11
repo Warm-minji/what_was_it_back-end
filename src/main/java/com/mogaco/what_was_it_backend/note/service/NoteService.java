@@ -1,6 +1,8 @@
 package com.mogaco.what_was_it_backend.note.service;
 
 import com.mogaco.what_was_it_backend.member.domain.Member;
+import com.mogaco.what_was_it_backend.member.exception.MemberException;
+import com.mogaco.what_was_it_backend.member.exception.MemberExceptionType;
 import com.mogaco.what_was_it_backend.note.domain.Note;
 import com.mogaco.what_was_it_backend.member.repository.MemberRepository;
 import com.mogaco.what_was_it_backend.note.repository.NoteRepository;
@@ -49,10 +51,10 @@ public class NoteService {
      * 복원하기
      */
     public List<RestoreNoteDto> findAllNotes(FindNoteDto findNoteDto) {
-        
+
         Member member = memberRepository
                 .findById(findNoteDto.getMemberId())
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow(() -> new MemberException(MemberExceptionType.WRONG_ID));
 
         return noteRepository.findAllByMember(member)
                 .stream().map(note -> new RestoreNoteDto(note.getMember().getId(),
@@ -63,6 +65,18 @@ public class NoteService {
                         note.getPublishedDate(),
                         note.isRepeatable()))
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * 모든 노트 삭제
+     */
+    @Transactional
+    public void deleteAllNotes(String memberId) {
+
+        Member member = memberRepository
+                .findById(memberId)
+                .orElseThrow(() -> new MemberException(MemberExceptionType.WRONG_ID));
+        noteRepository.removeAllByMember(member);
     }
 
 
