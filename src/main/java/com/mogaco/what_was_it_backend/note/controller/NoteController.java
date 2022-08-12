@@ -3,7 +3,7 @@ package com.mogaco.what_was_it_backend.note.controller;
 import com.mogaco.what_was_it_backend.member.service.MemberService;
 import com.mogaco.what_was_it_backend.note.controller.dto.BackUpNoteDto;
 import com.mogaco.what_was_it_backend.note.controller.dto.BackUpNoteRequest;
-import com.mogaco.what_was_it_backend.note.controller.dto.DeleteMemberAndNotesRequest;
+import com.mogaco.what_was_it_backend.note.controller.dto.DeleteMemberRequest;
 import com.mogaco.what_was_it_backend.note.controller.dto.RestoreNotesRequest;
 import com.mogaco.what_was_it_backend.note.service.NoteService;
 import com.mogaco.what_was_it_backend.note.service.dto.RestoreNoteDto;
@@ -43,14 +43,14 @@ public class NoteController {
 
     /**
      * TODO : 한 트랜잭션 안에서 해결하기
-     * @param deleteMemberAndNotesRequest
+     * @param deleteMemberRequest
      * @return
      */
-    @DeleteMapping("/delete/notes")
-    public ResponseEntity<Void> deleteMemberAndNotes(@RequestBody DeleteMemberAndNotesRequest deleteMemberAndNotesRequest) {
+    @DeleteMapping("/delete/member")
+    public ResponseEntity<Void> deleteMember(@RequestBody DeleteMemberRequest deleteMemberRequest) {
 
-        noteService.deleteAllNotes(deleteMemberAndNotesRequest.getMemberId());
-        memberService.deleteMember(deleteMemberAndNotesRequest.getMemberId());
+//        noteService.deleteAllNotes(deleteMemberAndNotesRequest.getMemberId());
+        memberService.deleteMember(deleteMemberRequest.getMemberId());
 
         return ResponseEntity.ok().build();
     }

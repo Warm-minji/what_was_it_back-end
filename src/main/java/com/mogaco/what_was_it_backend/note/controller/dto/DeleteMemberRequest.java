@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DeleteMemberAndNotesRequest {
+public class DeleteMemberRequest {
 
     private String memberId;
 }

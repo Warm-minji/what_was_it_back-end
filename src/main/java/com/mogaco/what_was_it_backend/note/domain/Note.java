@@ -36,6 +36,7 @@ public class Note {
     @CollectionTable(name = "scheduled_dates", joinColumns = @JoinColumn(name = "note_id"))
     private List<LocalDateTime> scheduledDates;
 
+    @Enumerated(EnumType.STRING)
     private RepeatType repeatType;
 
     private LocalDateTime publishedDate;
