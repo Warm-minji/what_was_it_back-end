@@ -40,16 +40,10 @@ public class NoteController {
 
         return ResponseEntity.ok(allNotes);
     }
-
-    /**
-     * TODO : 한 트랜잭션 안에서 해결하기
-     * @param deleteMemberRequest
-     * @return
-     */
+    
     @DeleteMapping("/delete/member")
     public ResponseEntity<Void> deleteMember(@RequestBody DeleteMemberRequest deleteMemberRequest) {
 
-//        noteService.deleteAllNotes(deleteMemberAndNotesRequest.getMemberId());
         memberService.deleteMember(deleteMemberRequest.getMemberId());
 
         return ResponseEntity.ok().build();

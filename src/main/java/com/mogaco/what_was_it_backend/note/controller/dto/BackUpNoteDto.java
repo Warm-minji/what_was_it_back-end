@@ -20,9 +20,9 @@ public class BackUpNoteDto {
     private List<String> keywords;
     private List<LocalDateTime> scheduledDates;
     private RepeatType repeatType;
-    private LocalDateTime publishedDate;
+    private LocalDateTime pubDate;
 
     public AddNoteDto toServiceDto() {
-        return new AddNoteDto(memberId, title, category, keywords, scheduledDates, repeatType, publishedDate);
+        return new AddNoteDto(memberId, title, category, keywords, scheduledDates, repeatType, pubDate);
     }
 }

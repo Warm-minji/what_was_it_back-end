@@ -41,6 +41,7 @@ public class NoteService {
             //멤버에 동일한 제목을 가진 노트가 있다면 update해주고, 아니면 새로 노트를 생성
             if (titleNote != null) {
                 titleNote.updateNote(noteDto);
+                continue;
             }
             Note note = Note.createNote(member, noteDto);
             noteRepository.save(note);
@@ -67,17 +68,17 @@ public class NoteService {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * 모든 노트 삭제
-     */
-    @Transactional
-    public void deleteAllNotes(String memberId) {
-
-        Member member = memberRepository
-                .findById(memberId)
-                .orElseThrow(() -> new MemberException(MemberExceptionType.WRONG_ID));
-        noteRepository.removeAllByMember(member);
-    }
+//    /**
+//     * 모든 노트 삭제
+//     */
+//    @Transactional
+//    public void deleteAllNotes(String memberId) {
+//
+//        Member member = memberRepository
+//                .findById(memberId)
+//                .orElseThrow(() -> new MemberException(MemberExceptionType.WRONG_ID));
+//        noteRepository.removeAllByMember(member);
+//    }
 
 
 }
