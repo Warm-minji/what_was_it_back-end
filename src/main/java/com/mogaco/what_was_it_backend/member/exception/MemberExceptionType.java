@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 
 public enum MemberExceptionType implements BaseExceptionType {
     ALREADY_EXIST_USER(600, HttpStatus.CONFLICT, "이미 존재하는 아이디입니다."),
-    WRONG_ID(601, HttpStatus.UNAUTHORIZED, "존재하지 않는 아이디입니다."),
+    NONEXISTENT_ID(601, HttpStatus.UNAUTHORIZED, "존재하지 않는 아이디입니다."),
     WRONG_PASSWORD(602, HttpStatus.UNAUTHORIZED, "비밀번호가 잘못되었습니다."),
     WRONG_ID_OR_PASSWORD(603, HttpStatus.UNAUTHORIZED, "아이디 혹은 비밀번호가 잘못되었습니다.");
 

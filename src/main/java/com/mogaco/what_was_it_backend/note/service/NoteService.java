@@ -25,10 +25,6 @@ public class NoteService {
     private final MemberRepository memberRepository;
     private final NoteRepository noteRepository;
 
-    /**
-     * 백업하기
-     * TODO : 비밀번호 틀리면 접근 못하게 케이스 추가
-     */
     @Transactional
     public void addAllNotes(List<AddNoteDto> addNoteDto) {
         //노트 추가
@@ -55,7 +51,7 @@ public class NoteService {
 
         Member member = memberRepository
                 .findById(findNoteDto.getMemberId())
-                .orElseThrow(() -> new MemberException(MemberExceptionType.WRONG_ID));
+                .orElseThrow(() -> new MemberException(MemberExceptionType.NONEXISTENT_ID));
 
         return noteRepository.findAllByMember(member)
                 .stream().map(note -> new RestoreNoteDto(note.getMember().getId(),

@@ -15,16 +15,10 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    /**
-     * TODO : 아이디 비밀번호 관련 로직 추가 (자리 수, 비밀번호 제약 등)
-     * @param memberId
-     * @param password
-     */
     @Transactional
     public void createMember(String memberId, String password) {
-
         //이미 존재하는 Id면 exception throw
-        if (memberRepository.findById(memberId).isPresent()) {
+        if (memberRepository.existsById(memberId)) {
             throw new MemberException(MemberExceptionType.ALREADY_EXIST_USER);
         }
         //Id가 존재하지 않으면 생성
@@ -34,6 +28,10 @@ public class MemberService {
 
     @Transactional
     public void deleteMember(String memberId) {
-        memberRepository.removeById(memberId);
+        //Id가 존재하지 않는 경우
+        if (!memberRepository.existsById(memberId)) {
+            throw new MemberException(MemberExceptionType.NONEXISTENT_ID);
+        }
+        memberRepository.deleteById(memberId);
     }
 }
