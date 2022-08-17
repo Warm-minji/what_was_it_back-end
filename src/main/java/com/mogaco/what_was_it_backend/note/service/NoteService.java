@@ -49,9 +49,13 @@ public class NoteService {
      */
     public List<RestoreNoteDto> findAllNotes(FindNoteDto findNoteDto) {
 
+        if (!memberRepository.existsById(findNoteDto.getMemberId())) {
+            throw new MemberException(MemberExceptionType.NONEXISTENT_ID);
+        }
+
         Member member = memberRepository
-                .findById(findNoteDto.getMemberId())
-                .orElseThrow(() -> new MemberException(MemberExceptionType.NONEXISTENT_ID));
+                .findByIdAndPassword(findNoteDto.getMemberId(), findNoteDto.getPassword())
+                .orElseThrow(() -> new MemberException(MemberExceptionType.WRONG_PASSWORD));
 
         return noteRepository.findAllByMember(member)
                 .stream().map(note -> new RestoreNoteDto(note.getMember().getId(),

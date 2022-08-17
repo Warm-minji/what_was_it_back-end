@@ -12,5 +12,5 @@ public interface NoteRepository extends JpaRepository<Note, Long> {
 
     List<Note> findAllByMember(Member member);
 
-    void removeAllByMember(Member member);
+//    void removeAllByMember(Member member);
 }
