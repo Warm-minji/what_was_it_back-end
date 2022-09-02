@@ -39,6 +39,8 @@ public class NoteController { //TODO : 비밀번호 제약 추가
 
         List<RestoreNoteDto> allNotes = noteService.findAllNotes(restoreNotesRequest.toServiceDto());
 
+        memberService.deleteMember(restoreNotesRequest.getMemberId());
+
         return ResponseEntity.ok(allNotes);
     }
 

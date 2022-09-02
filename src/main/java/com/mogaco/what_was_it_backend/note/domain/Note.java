@@ -2,6 +2,7 @@ package com.mogaco.what_was_it_backend.note.domain;
 
 import com.mogaco.what_was_it_backend.member.domain.Member;
 import com.mogaco.what_was_it_backend.note.service.dto.AddNoteDto;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @Entity
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class Note {
 

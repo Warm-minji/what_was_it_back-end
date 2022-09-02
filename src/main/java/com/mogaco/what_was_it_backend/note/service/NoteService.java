@@ -47,13 +47,14 @@ public class NoteService {
     /**
      * 복원하기
      */
+    @Transactional
     public List<RestoreNoteDto> findAllNotes(FindNoteDto findNoteDto) {
 
         Member member = memberRepository
                 .findByIdAndPassword(findNoteDto.getMemberId(), findNoteDto.getPassword())
                 .orElseThrow(() -> new MemberException(MemberExceptionType.WRONG_ID_OR_PASSWORD));
 
-        return noteRepository.findAllByMember(member)
+        List<RestoreNoteDto> allNotes = noteRepository.findAllByMember(member)
                 .stream().map(note -> new RestoreNoteDto(note.getMember().getId(),
                         note.getTitle(),
                         note.getCategory(),
@@ -62,6 +63,8 @@ public class NoteService {
                         note.getRepeatType(),
                         note.getPublishedDate()))
                 .collect(Collectors.toList());
+
+        return allNotes;
     }
 
 //    /**
@@ -72,9 +75,8 @@ public class NoteService {
 //
 //        Member member = memberRepository
 //                .findById(memberId)
-//                .orElseThrow(() -> new MemberException(MemberExceptionType.WRONG_ID));
+//                .orElseThrow(() -> new MemberException(MemberExceptionType.WRONG_ID_OR_PASSWORD));
 //        noteRepository.removeAllByMember(member);
 //    }
-
 
 }
